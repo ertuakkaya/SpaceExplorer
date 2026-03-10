@@ -63,6 +63,12 @@ kotlin {
 
             implementation(libs.androidx.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
+
+            // coil
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.compose)
+            implementation(libs.coil)
+            implementation(libs.coil.network.ktor)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

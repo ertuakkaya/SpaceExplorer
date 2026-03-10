@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ertugrulakkaya.spaceexplorer.presentation.details.DetailScreen
 import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeScreen
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
+import com.ertugrulakkaya.spaceexplorer.presentation.theme.SpaceExplorerTheme
 import org.jetbrains.compose.resources.painterResource
 
 import spaceexplorer.composeapp.generated.resources.Res
@@ -34,16 +35,25 @@ fun App() {
 
 
 
-    MaterialTheme {
-
+    SpaceExplorerTheme {
         NavHost(
             navController = navController,
             startDestination = Screen.Home
-        ){
-            composable<Screen.Home>{
-                HomeScreen(navController)
+        ) {
+            composable<Screen.Home> {
+                HomeScreen(
+                    onNavigateToDetail = { launchId ->
+                        navController.navigate(
+                            Screen.Detail(
+                                id = launchId
+                            )
+                        ){
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
-            composable<Screen.Detail>{
+            composable<Screen.Detail> {
                 DetailScreen(navController)
             }
         }
