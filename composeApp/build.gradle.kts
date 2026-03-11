@@ -72,6 +72,10 @@ kotlin {
 
             // kotlinx datetime
             implementation(libs.kotlinx.datetime)
+
+            // compottie
+            implementation(libs.compottie)
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

@@ -64,7 +64,7 @@ class HomeViewModel(
     private fun loadLaunches() {
         viewModelScope.launch {
             _uiState.update { it.copy(launches = UiState.Loading) }
-            delay(2000)
+            delay(6000)
             observeLaunchesUseCase().collect { launches ->
                 _uiState.update {
                     it.copy(
@@ -84,7 +84,7 @@ class HomeViewModel(
                     _uiState.update { it.copy(isRefreshing = false) }
                 },
                 onFailure = {
-
+                    _uiState.update { it.copy(isRefreshing = false) }
                 }
             )
 

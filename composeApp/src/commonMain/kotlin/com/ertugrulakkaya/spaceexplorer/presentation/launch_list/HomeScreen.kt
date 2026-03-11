@@ -26,6 +26,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LauchListLoadingContent
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchCard
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
 import com.ertugrulakkaya.spaceexplorer.presentation.util.toFullDateTime
@@ -94,13 +95,7 @@ fun HomeScreen(
             }
 
             UiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator(color = Color.White)
-                }
+                LauchListLoadingContent()
             }
 
             is UiState.Success -> {

@@ -21,6 +21,7 @@ sqlite = "2.5.0-alpha13"
 navigation = "2.9.2"
 coil = "3.0.4"
 kotlinx-datetime = "0.7.1"
+compottie = "2.1.0"
 
 
 [libraries]
@@ -75,6 +76,9 @@ coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.re
 
 # kotlinx datetime
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref ="kotlinx-datetime" }
+
+# compottie, lottie for cmp
+compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
