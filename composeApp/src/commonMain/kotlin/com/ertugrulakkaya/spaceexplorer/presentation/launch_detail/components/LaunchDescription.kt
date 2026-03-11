@@ -1,4 +1,4 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.details.components
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

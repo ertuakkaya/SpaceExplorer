@@ -1,8 +1,4 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.details
-
-import com.ertugrulakkaya.spaceexplorer.domain.model.Launch
-import com.ertugrulakkaya.spaceexplorer.domain.model.Rocket
-import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_detail
 
 data class DetailUiState(
     val missionName: String,

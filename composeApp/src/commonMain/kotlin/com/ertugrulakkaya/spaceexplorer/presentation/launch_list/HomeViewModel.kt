@@ -1,4 +1,4 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.home
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,10 +6,10 @@ import com.ertugrulakkaya.spaceexplorer.domain.usecase.ObserveLaunchesUseCase
 import com.ertugrulakkaya.spaceexplorer.domain.usecase.RefreshLaunchesUseCase
 import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -64,6 +64,7 @@ class HomeViewModel(
     private fun loadLaunches() {
         viewModelScope.launch {
             _uiState.update { it.copy(launches = UiState.Loading) }
+            delay(2000)
             observeLaunchesUseCase().collect { launches ->
                 _uiState.update {
                     it.copy(

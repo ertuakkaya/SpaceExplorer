@@ -1,4 +1,4 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.home
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_list
 
 import com.ertugrulakkaya.spaceexplorer.domain.model.Launch
 import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState

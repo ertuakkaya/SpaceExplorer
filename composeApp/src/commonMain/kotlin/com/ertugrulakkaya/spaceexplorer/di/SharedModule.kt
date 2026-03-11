@@ -11,10 +11,9 @@ import com.ertugrulakkaya.spaceexplorer.data.repository.LaunchRepositoryImpl
 import com.ertugrulakkaya.spaceexplorer.domain.repository.LaunchRepository
 import com.ertugrulakkaya.spaceexplorer.domain.usecase.ObserveLaunchesUseCase
 import com.ertugrulakkaya.spaceexplorer.domain.usecase.RefreshLaunchesUseCase
-import com.ertugrulakkaya.spaceexplorer.presentation.details.DetailViewModel
-import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeViewModel
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.DetailViewModel
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.HomeViewModel
 import org.koin.core.module.dsl.viewModel
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val sharedModule = module {

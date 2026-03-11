@@ -1,4 +1,4 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.details.components
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.ertugrulakkaya.spaceexplorer.presentation.home.components.LaunchStatusBadge
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchStatusBadge
 
 @Composable
 fun TitleAndSubtitleWithBadge(

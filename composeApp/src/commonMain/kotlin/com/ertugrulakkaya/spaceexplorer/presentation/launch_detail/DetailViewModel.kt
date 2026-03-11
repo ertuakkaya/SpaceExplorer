@@ -1,23 +1,15 @@
-package com.ertugrulakkaya.spaceexplorer.presentation.details
+package com.ertugrulakkaya.spaceexplorer.presentation.launch_detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.ertugrulakkaya.spaceexplorer.domain.usecase.ObserveLaunchesUseCase
-import com.ertugrulakkaya.spaceexplorer.domain.usecase.RefreshLaunchesUseCase
-import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
-import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeEffect
-import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeEvent
-import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeUiState
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.fold
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
