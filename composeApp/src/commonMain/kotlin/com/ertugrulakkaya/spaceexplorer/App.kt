@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.ertugrulakkaya.spaceexplorer.presentation.details.DetailScreen
 import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeScreen
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
@@ -42,19 +43,22 @@ fun App() {
         ) {
             composable<Screen.Home> {
                 HomeScreen(
-                    onNavigateToDetail = { launchId ->
+                    onNavigateToDetail = { detailData ->
                         navController.navigate(
-                            Screen.Detail(
-                                id = launchId
-                            )
+                            detailData
                         ){
                             launchSingleTop = true
                         }
                     }
                 )
             }
-            composable<Screen.Detail> {
-                DetailScreen(navController)
+            composable<Screen.Detail> { backStackEntry ->
+                val detailArgs = backStackEntry.toRoute<Screen.Detail>()
+                DetailScreen(
+                    onNavigateToDetail = {
+
+                    }
+                )
             }
         }
 

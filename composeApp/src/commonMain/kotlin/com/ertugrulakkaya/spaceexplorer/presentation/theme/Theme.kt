@@ -8,7 +8,10 @@ private val LightColors = lightColorScheme(
     primary = PrimaryColor,
     secondary = ContainerColor,
     tertiary = ContainerBorderColor,
-    onPrimary = TextColor
+    onPrimary = TextColor,
+    onPrimaryFixed = SuccessColor,
+    onError = FailColor,
+    secondaryContainer = SecondaryContainerColor
 
 )
 

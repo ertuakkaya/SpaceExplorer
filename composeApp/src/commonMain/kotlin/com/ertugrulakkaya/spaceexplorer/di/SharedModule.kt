@@ -11,6 +11,7 @@ import com.ertugrulakkaya.spaceexplorer.data.repository.LaunchRepositoryImpl
 import com.ertugrulakkaya.spaceexplorer.domain.repository.LaunchRepository
 import com.ertugrulakkaya.spaceexplorer.domain.usecase.ObserveLaunchesUseCase
 import com.ertugrulakkaya.spaceexplorer.domain.usecase.RefreshLaunchesUseCase
+import com.ertugrulakkaya.spaceexplorer.presentation.details.DetailViewModel
 import com.ertugrulakkaya.spaceexplorer.presentation.home.HomeViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -40,6 +41,7 @@ val sharedModule = module {
 
     // Viewmodel
     viewModel { HomeViewModel(get(), get())  }
+    viewModel { DetailViewModel(get()) }
 
 
 }

@@ -31,7 +31,9 @@ data class LinksDto(
     val wikipedia: String?,
 
     @SerialName("youtube_id")
-    val youtubeId: String?
+    val youtubeId: String?,
+
+    val webcast : String?
 )
 
 @Serializable

@@ -13,7 +13,9 @@ data class LaunchEntity(
     val dateUtc: String,
     val rocketName: String?,
     val patchImageSmall: String?,
+    val patchImageBig : String?,
     val article: String?,
+    val webcast  : String?,
     val wikipedia: String?,
     val youtubeId: String?
 )

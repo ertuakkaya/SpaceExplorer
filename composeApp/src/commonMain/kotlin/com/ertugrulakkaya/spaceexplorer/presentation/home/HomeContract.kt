@@ -9,14 +9,34 @@ data class HomeUiState(
 )
 
 sealed interface HomeEffect {
-    data class NavigateToDetail(val launchId: String) : HomeEffect
+    data class NavigateToDetail(
+        val missionName: String,
+        val launchDate: String,
+        val rocketName: String,
+        val missionDescription: String,
+        val launchSuccess: Boolean,
+        val badgePhotoUrl : String,
+        val articleUrl : String,
+        val wikiUrl : String,
+        val webCastUrl : String,
+    ) : HomeEffect
 }
 
 sealed class HomeEvent {
     object RefreshLaunches : HomeEvent()
     object LoadLaunches : HomeEvent()
 
-    data class OnLaunchClick(val launchId: String) : HomeEvent()
+    data class OnLaunchClick(
+        val missionName: String,
+        val launchDate: String,
+        val rocketName: String,
+        val missionDescription: String,
+        val launchSuccess: Boolean,
+        val badgePhotoUrl : String,
+        val articleUrl : String,
+        val wikiUrl : String,
+        val webCastUrl : String,
+    ) : HomeEvent()
 
 }
 

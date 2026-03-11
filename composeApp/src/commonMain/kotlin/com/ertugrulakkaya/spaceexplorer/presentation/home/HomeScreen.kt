@@ -38,6 +38,9 @@ import androidx.navigation.NavController
 import com.ertugrulakkaya.spaceexplorer.Greeting
 import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
 import com.ertugrulakkaya.spaceexplorer.presentation.home.components.LaunchCard
+import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
+import com.ertugrulakkaya.spaceexplorer.presentation.util.toDate
+import com.ertugrulakkaya.spaceexplorer.presentation.util.toFullDateTime
 import io.ktor.websocket.Frame
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -48,7 +51,7 @@ import spaceexplorer.composeapp.generated.resources.compose_multiplatform
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = koinViewModel(),
-    onNavigateToDetail: (String) -> Unit = {}
+    onNavigateToDetail: (Screen.Detail) -> Unit = {}
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -58,7 +61,20 @@ fun HomeScreen(
     LaunchedEffect(effect) {
         viewModel.effect.collect { effect ->
             when(effect){
-                is HomeEffect.NavigateToDetail -> onNavigateToDetail(effect.launchId)
+                is HomeEffect.NavigateToDetail -> onNavigateToDetail(
+                    Screen.Detail(
+                        missionName = effect.missionName,
+                        launchDate = effect.launchDate,
+                        rocketName = effect.rocketName,
+                        missionDescription = effect.missionDescription,
+                        launchSuccess = effect.launchSuccess,
+                        badgePhotoUrl = effect.badgePhotoUrl,
+                        articleUrl = effect.articleUrl,
+                        webCastUrl = effect.webCastUrl,
+                        wikiUrl = effect.wikiUrl
+                    )
+
+                )
             }
         }
     }
@@ -70,7 +86,7 @@ fun HomeScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 title = {
                     Text(
-                        text = "SpaceX Launches",
+                        text = "SpaceX Launches 1",
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize
@@ -120,7 +136,19 @@ fun HomeScreen(
                             modifier = Modifier,
                             launch = launch,
                             onClick = {
-                                viewModel.onEvent(HomeEvent.OnLaunchClick(launch.id))
+                                viewModel.onEvent(
+                                    HomeEvent.OnLaunchClick(
+                                        missionName = launch.name,
+                                        launchDate = launch.dateUtc.toFullDateTime(),
+                                        rocketName = launch.rocketName ?: "Unknown",
+                                        missionDescription = launch.details ?: "No description available",
+                                        launchSuccess = launch.success ?: false,
+                                        badgePhotoUrl = launch.patchImageSmall ?: "",
+                                        articleUrl = launch.article ?: "",
+                                        wikiUrl = launch.wikipedia ?: "",
+                                        webCastUrl = launch.webcast ?: ""
+                                    )
+                                )
                             }
 
                         )

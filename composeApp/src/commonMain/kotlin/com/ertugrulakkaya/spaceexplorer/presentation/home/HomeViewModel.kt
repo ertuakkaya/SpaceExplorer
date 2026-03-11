@@ -37,7 +37,19 @@ class HomeViewModel(
             HomeEvent.LoadLaunches -> loadLaunches()
             HomeEvent.RefreshLaunches -> refreshLaunches()
             is HomeEvent.OnLaunchClick -> {
-                sendEffect(HomeEffect.NavigateToDetail(event.launchId))
+                sendEffect(
+                    HomeEffect.NavigateToDetail(
+                        missionName = event.missionName,
+                        launchDate = event.launchDate,
+                        rocketName = event.rocketName,
+                        missionDescription = event.missionDescription,
+                        launchSuccess = event.launchSuccess,
+                        badgePhotoUrl = event.badgePhotoUrl,
+                        articleUrl = event.articleUrl,
+                        wikiUrl = event.wikiUrl,
+                        webCastUrl = event.webCastUrl
+                    )
+                )
             }
 
         }
