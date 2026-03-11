@@ -7,8 +7,12 @@ import com.ertugrulakkaya.spaceexplorer.data.remote.datasource.LaunchRemoteDataS
 import com.ertugrulakkaya.spaceexplorer.data.remote.dto.RocketDto
 import com.ertugrulakkaya.spaceexplorer.domain.model.Launch
 import com.ertugrulakkaya.spaceexplorer.domain.repository.LaunchRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 class LaunchRepositoryImpl (
     private val launchLocalDataSource: LaunchLocalDataSource,
@@ -20,12 +24,13 @@ class LaunchRepositoryImpl (
             .map { entities ->
                 entities.map { it.toDomain() }
             }
+            .flowOn(Dispatchers.Default)
 
     }
 
 
-    override suspend fun refreshLaunches(): Result<Unit> {
-        return launchRemoteDataSource.getLaunches().fold(
+    override suspend fun refreshLaunches(): Result<Unit>  = withContext(Dispatchers.IO){
+        launchRemoteDataSource.getLaunches().fold(
             onSuccess = { remoteLaunches ->
                 try {
                     val rocketCache = mutableMapOf<String, RocketDto>()
