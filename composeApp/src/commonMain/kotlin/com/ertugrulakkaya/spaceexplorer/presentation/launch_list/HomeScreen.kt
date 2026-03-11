@@ -28,6 +28,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ertugrulakkaya.spaceexplorer.presentation.base.UiState
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LauchListLoadingContent
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchCard
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchListErrorContent
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
 import com.ertugrulakkaya.spaceexplorer.presentation.util.toFullDateTime
 import org.koin.compose.viewmodel.koinViewModel
@@ -84,9 +85,11 @@ fun HomeScreen(
     ) { paddingValues ->
         when (val launchesState = uiState.launches) {
             is UiState.Error -> {
-                Text(
-                    text = launchesState.message,
-                    color = MaterialTheme.colorScheme.error
+                LaunchListErrorContent(
+                    modifier = Modifier.padding(paddingValues),
+                    onRetryClick = {
+                        viewModel.onEvent(HomeEvent.RefreshLaunches)
+                    }
                 )
             }
 
@@ -95,7 +98,9 @@ fun HomeScreen(
             }
 
             UiState.Loading -> {
-                LauchListLoadingContent()
+                LauchListLoadingContent(
+                    modifier = Modifier.padding(paddingValues),
+                )
             }
 
             is UiState.Success -> {

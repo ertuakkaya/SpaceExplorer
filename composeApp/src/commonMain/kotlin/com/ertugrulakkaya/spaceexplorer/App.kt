@@ -40,6 +40,7 @@ fun App() {
                 val detailArgs = backStackEntry.toRoute<Screen.Detail>()
                 DetailScreen(
                     onNavigateToDetail = {
+                        navController.navigateUp()
 
                     }
                 )

@@ -22,7 +22,7 @@ import spaceexplorer.composeapp.generated.resources.Res
 import spaceexplorer.composeapp.generated.resources.play_circle
 
 @Composable
-fun WatchVideoButton(
+fun FilledButtonWithIcon(
     modifier: Modifier = Modifier,
     onClick: () -> Unit,
     paninterResource : Painter = painterResource(Res.drawable.play_circle),

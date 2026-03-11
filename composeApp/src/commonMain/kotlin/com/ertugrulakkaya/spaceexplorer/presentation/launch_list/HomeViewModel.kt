@@ -64,15 +64,24 @@ class HomeViewModel(
     private fun loadLaunches() {
         viewModelScope.launch {
             _uiState.update { it.copy(launches = UiState.Loading) }
-            delay(6000)
-            observeLaunchesUseCase().collect { launches ->
+            try {
+                observeLaunchesUseCase().collect { launches ->
+                    _uiState.update {
+                        it.copy(
+                            launches = UiState.Success(launches),
+                            isRefreshing = false
+                        )
+                    }
+                }
+            }catch (e : Exception){
                 _uiState.update {
                     it.copy(
-                        launches = UiState.Success(launches),
+                        launches = UiState.Error("An error occurred while loading launches"),
                         isRefreshing = false
                     )
                 }
             }
+
         }
     }
 
@@ -84,7 +93,12 @@ class HomeViewModel(
                     _uiState.update { it.copy(isRefreshing = false) }
                 },
                 onFailure = {
-                    _uiState.update { it.copy(isRefreshing = false) }
+                    _uiState.update {
+                        it.copy(
+                            isRefreshing = false,
+                            launches = UiState.Error("An error occurred while refreshing launches")
+                        )
+                    }
                 }
             )
 

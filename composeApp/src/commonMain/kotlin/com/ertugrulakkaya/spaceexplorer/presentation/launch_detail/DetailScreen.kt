@@ -12,6 +12,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,6 +23,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -30,19 +34,20 @@ import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.De
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.LaunchDate
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.LaunchDescription
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.TitleAndSubtitleWithBadge
-import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.WatchVideoButton
+import com.ertugrulakkaya.spaceexplorer.presentation.launch_detail.components.FilledButtonWithIcon
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import spaceexplorer.composeapp.generated.resources.Res
 import spaceexplorer.composeapp.generated.resources.article
 import spaceexplorer.composeapp.generated.resources.book_ribbon
+import spaceexplorer.composeapp.generated.resources.chevron_right
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    viewModel : DetailViewModel = koinViewModel(),
+    viewModel: DetailViewModel = koinViewModel(),
     onNavigateToDetail: () -> Unit = {},
-){
+) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val effect by viewModel.effect.collectAsStateWithLifecycle(initialValue = null)
@@ -50,7 +55,7 @@ fun DetailScreen(
 
     LaunchedEffect(effect) {
         viewModel.effect.collect { effect ->
-            when(effect){
+            when (effect) {
                 DetailEffect.NavigateBack -> onNavigateToDetail()
                 is DetailEffect.OpenArticleUrl -> openUrl(effect.url)
                 is DetailEffect.OpenVideoUrl -> openUrl(effect.url)
@@ -66,13 +71,29 @@ fun DetailScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 title = {
                     Text(
-                        text = "SpaceX Launches",
+                        text = uiState.missionName,
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize
 
                         )
                     )
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            viewModel.onEvent(DetailEvent.OnBackClick)
+                        }
+                    ) {
+                        Icon(
+                            modifier = Modifier.rotate(180f),
+                            painter = painterResource(Res.drawable.chevron_right),
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
+
+
+                    }
                 }
             )
         }
@@ -110,7 +131,7 @@ fun DetailScreen(
 
             Spacer(modifier = Modifier.height(40.dp))
 
-            WatchVideoButton(
+            FilledButtonWithIcon(
 
                 onClick = { viewModel.onEvent(DetailEvent.OnWatchVideoClick(uiState.webCastUrl)) },
                 //buttonText = uiState.webCastUrl
@@ -118,17 +139,17 @@ fun DetailScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 BorderedLinkButton(
                     modifier = Modifier
                         .weight(1f)
                         .height(52.dp),
                     onClick = {
-                       viewModel.onEvent(DetailEvent.OnWikiClick(uiState.wikiUrl))
+                        viewModel.onEvent(DetailEvent.OnWikiClick(uiState.wikiUrl))
                     },
                     paninterResource = painterResource(Res.drawable.book_ribbon),
                     buttonText = "Wikipedia"
@@ -145,7 +166,6 @@ fun DetailScreen(
                     buttonText = "Article"
                 )
             }
-
 
 
         }
