@@ -30,6 +30,7 @@ import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.Lauc
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchCard
 import com.ertugrulakkaya.spaceexplorer.presentation.launch_list.components.LaunchListErrorContent
 import com.ertugrulakkaya.spaceexplorer.presentation.navigation.Screen
+import com.ertugrulakkaya.spaceexplorer.presentation.util.formatIsoToDateTime
 import com.ertugrulakkaya.spaceexplorer.presentation.util.toFullDateTime
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -72,7 +73,7 @@ fun HomeScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 title = {
                     Text(
-                        text = "SpaceX Launches 2",
+                        text = "SpaceX Launches 3",
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize
@@ -124,7 +125,7 @@ fun HomeScreen(
                                 viewModel.onEvent(
                                     HomeEvent.OnLaunchClick(
                                         missionName = launch.name,
-                                        launchDate = launch.dateUtc.toFullDateTime(),
+                                        launchDate = launch.dateUtc.formatIsoToDateTime(),
                                         rocketName = launch.rocketName ?: "Unknown",
                                         missionDescription = launch.details ?: "No description available",
                                         launchSuccess = launch.success ?: false,

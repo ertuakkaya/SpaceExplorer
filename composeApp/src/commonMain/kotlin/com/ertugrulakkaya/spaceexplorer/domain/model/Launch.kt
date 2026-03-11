@@ -8,7 +8,7 @@ data class Launch(
     val flightNumber: Int,
     val details: String?,
     val success: Boolean?,
-    val dateUtc: Instant,
+    val dateUtc: String,
     val rocketName: String?,
     val patchImageSmall: String?,
     val patchImageBig: String?,

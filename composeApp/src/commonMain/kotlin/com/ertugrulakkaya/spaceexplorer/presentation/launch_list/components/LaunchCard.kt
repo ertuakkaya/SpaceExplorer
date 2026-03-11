@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.ertugrulakkaya.spaceexplorer.domain.model.Launch
+import com.ertugrulakkaya.spaceexplorer.presentation.util.formatIsoToDate
 import com.ertugrulakkaya.spaceexplorer.presentation.util.toDate
 import org.jetbrains.compose.resources.painterResource
 import spaceexplorer.composeapp.generated.resources.Res
@@ -59,7 +60,7 @@ fun LaunchCard(
             LaunchDetails(
                 modifier = Modifier.weight(1f),
                 launchName = launch.name,
-                launchDate = launch.dateUtc.toDate(),
+                launchDate = launch.dateUtc.formatIsoToDate(),
                 launchRocket = launch.rocketName ?: "Unknown"
             )
             Spacer(modifier = Modifier.width(16.dp))

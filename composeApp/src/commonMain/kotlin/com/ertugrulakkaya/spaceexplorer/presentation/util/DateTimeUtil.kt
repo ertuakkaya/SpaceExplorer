@@ -26,3 +26,7 @@ fun Instant.toFullDateTime(): String {
     )
     return "$month ${dateTime.day}, ${dateTime.year} - $hour:$minute"
 }
+
+expect fun String.formatIsoToDate() : String
+
+expect fun String.formatIsoToDateTime() : String
