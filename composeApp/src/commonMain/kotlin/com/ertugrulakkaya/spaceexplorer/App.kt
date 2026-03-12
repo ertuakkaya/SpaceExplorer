@@ -37,7 +37,6 @@ fun App() {
                 )
             }
             composable<Screen.Detail> { backStackEntry ->
-                val detailArgs = backStackEntry.toRoute<Screen.Detail>()
                 DetailScreen(
                     onNavigateToDetail = {
                         navController.navigateUp()

@@ -5,6 +5,7 @@ data class DetailUiState(
     val launchDate: String,
     val rocketName: String,
     val missionDescription: String,
+    val rocketDescription : String,
     val launchSuccess: Boolean,
     val badgePhotoUrl : String,
     val articleUrl : String,

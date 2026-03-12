@@ -22,10 +22,8 @@ class HomeViewModel(
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
-
     private val _effect = Channel<HomeEffect>(Channel.BUFFERED)
     val effect = _effect.receiveAsFlow()
-
 
     init {
         onEvent(HomeEvent.LoadLaunches)
@@ -43,6 +41,7 @@ class HomeViewModel(
                         launchDate = event.launchDate,
                         rocketName = event.rocketName,
                         missionDescription = event.missionDescription,
+                        rocketDescription = event.rocketDescription,
                         launchSuccess = event.launchSuccess,
                         badgePhotoUrl = event.badgePhotoUrl,
                         articleUrl = event.articleUrl,
@@ -64,6 +63,7 @@ class HomeViewModel(
     private fun loadLaunches() {
         viewModelScope.launch {
             _uiState.update { it.copy(launches = UiState.Loading) }
+            //delay(6000)
             try {
                 observeLaunchesUseCase().collect { launches ->
                     _uiState.update {
@@ -93,12 +93,16 @@ class HomeViewModel(
                     _uiState.update { it.copy(isRefreshing = false) }
                 },
                 onFailure = {
-                    _uiState.update {
-                        it.copy(
-                            isRefreshing = false,
-                            launches = UiState.Error("An error occurred while refreshing launches")
-                        )
+                    _uiState.update { it.copy(isRefreshing = false,) }
+                    if (_uiState.value.launches is UiState.Success && (_uiState.value.launches as UiState.Success).data.isEmpty()){
+                        _uiState.update {
+                            it.copy(
+                                launches = UiState.Error("An error occurred while refreshing launches")
+                            )
+                        }
                     }
+
+
                 }
             )
 

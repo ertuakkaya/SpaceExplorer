@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -54,6 +55,7 @@ fun HomeScreen(
                         launchDate = effect.launchDate,
                         rocketName = effect.rocketName,
                         missionDescription = effect.missionDescription,
+                        rocketDescription = effect.rocketDescription,
                         launchSuccess = effect.launchSuccess,
                         badgePhotoUrl = effect.badgePhotoUrl,
                         articleUrl = effect.articleUrl,
@@ -73,7 +75,7 @@ fun HomeScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 title = {
                     Text(
-                        text = "SpaceX Launches 3",
+                        text = "SpaceX Launches 5",
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize
@@ -106,40 +108,50 @@ fun HomeScreen(
 
             is UiState.Success -> {
                 val launches = launchesState.data
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                    contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 24.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-
+                PullToRefreshBox(
+                    isRefreshing = uiState.isRefreshing,
+                    onRefresh = {
+                        viewModel.onEvent(HomeEvent.RefreshLaunches)
+                    },
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    items(
-                        items = launches,
-                        key = { launch -> launch.id }
-                    ) { launch ->
-                        LaunchCard(
-                            modifier = Modifier,
-                            launch = launch,
-                            onClick = {
-                                viewModel.onEvent(
-                                    HomeEvent.OnLaunchClick(
-                                        missionName = launch.name,
-                                        launchDate = launch.dateUtc.formatIsoToDateTime(),
-                                        rocketName = launch.rocketName ?: "Unknown",
-                                        missionDescription = launch.details ?: "No description available",
-                                        launchSuccess = launch.success ?: false,
-                                        badgePhotoUrl = launch.patchImageSmall ?: "",
-                                        articleUrl = launch.article ?: "",
-                                        wikiUrl = launch.wikipedia ?: "",
-                                        webCastUrl = launch.webcast ?: ""
-                                    )
-                                )
-                            }
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
+                        contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 24.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
 
-                        )
+                    ) {
+                        items(
+                            items = launches,
+                            key = { launch -> launch.id }
+                        ) { launch ->
+                            LaunchCard(
+                                modifier = Modifier,
+                                launch = launch,
+                                onClick = {
+                                    viewModel.onEvent(
+                                        HomeEvent.OnLaunchClick(
+                                            missionName = launch.name,
+                                            launchDate = launch.dateUtc.formatIsoToDateTime(),
+                                            rocketName = launch.rocketName ?: "Unknown",
+                                            missionDescription = launch.details ?: "No description available",
+                                            rocketDescription = launch.rocketDescription ?: "No description available",
+                                            launchSuccess = launch.success ?: false,
+                                            badgePhotoUrl = launch.patchImageSmall ?: "",
+                                            articleUrl = launch.article ?: "",
+                                            wikiUrl = launch.wikipedia ?: "",
+                                            webCastUrl = launch.webcast ?: ""
+                                        )
+                                    )
+                                }
+
+                            )
+                        }
                     }
                 }
+
             }
         }
     }

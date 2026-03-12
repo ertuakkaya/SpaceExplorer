@@ -6,7 +6,8 @@ import com.ertugrulakkaya.spaceexplorer.domain.model.Launch
 import kotlin.time.Instant
 
 fun LaunchDto.toDomain(
-    rocketName: String?
+    rocketName: String?,
+    rocketDescription: String?
 ): Launch {
     return Launch(
         id = id,
@@ -16,6 +17,7 @@ fun LaunchDto.toDomain(
         success = success,
         dateUtc = dateUtc,
         rocketName = rocketName,
+        rocketDescription = rocketDescription,
         patchImageSmall = links.patch?.small,
         patchImageBig = links.patch?.large,
         article = links.article,
@@ -27,7 +29,8 @@ fun LaunchDto.toDomain(
 
 
 fun LaunchDto.toEntity(
-    rocketName: String?
+    rocketName: String?,
+    rocketDescription: String?
 ): LaunchEntity {
     return LaunchEntity(
         id = id,
@@ -37,6 +40,7 @@ fun LaunchDto.toEntity(
         success = success,
         dateUtc = dateUtc,
         rocketName = rocketName,
+        rocketDescription = rocketDescription,
         patchImageSmall = links.patch?.small,
         patchImageBig  = links.patch?.large,
         article = links.article,
@@ -56,6 +60,7 @@ fun LaunchEntity.toDomain(): Launch {
         success = success,
         dateUtc = dateUtc,
         rocketName = rocketName,
+        rocketDescription = rocketDescription,
         patchImageSmall = patchImageSmall,
         patchImageBig = patchImageBig,
         article = article,

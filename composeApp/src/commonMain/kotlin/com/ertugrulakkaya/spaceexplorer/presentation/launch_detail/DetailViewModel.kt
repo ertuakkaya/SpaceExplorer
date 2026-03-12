@@ -17,7 +17,6 @@ class DetailViewModel(
 ) : ViewModel() {
 
     private val detailArgs = savedStateHandle.toRoute<Screen.Detail>()
-
     private val _uiState = MutableStateFlow(DetailUiState(
         missionName = detailArgs.missionName,
         launchDate = detailArgs.launchDate,
@@ -27,14 +26,14 @@ class DetailViewModel(
         badgePhotoUrl = detailArgs.badgePhotoUrl,
         articleUrl = detailArgs.articleUrl,
         wikiUrl = detailArgs.wikiUrl,
-        webCastUrl = detailArgs.webCastUrl
+        webCastUrl = detailArgs.webCastUrl,
+        rocketDescription = detailArgs.rocketDescription
     ))
     val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
 
 
     private val _effect = Channel<DetailEffect>(Channel.BUFFERED)
     val effect = _effect.receiveAsFlow()
-
 
     fun onEvent(event: DetailEvent) {
         when (event) {
@@ -65,8 +64,4 @@ class DetailViewModel(
             _effect.send(effect)
         }
     }
-
-
-
-
 }

@@ -10,6 +10,7 @@ data class Launch(
     val success: Boolean?,
     val dateUtc: String,
     val rocketName: String?,
+    val rocketDescription : String?,
     val patchImageSmall: String?,
     val patchImageBig: String?,
     val article: String?,

@@ -39,7 +39,7 @@ class LaunchRepositoryImpl (
                        val rocket = rocketCache.getOrPut(lauch.rocket){
                            launchRemoteDataSource.getRocket(lauch.rocket).getOrThrow()
                        }
-                       lauch.toEntity(rocketName = rocket.name)
+                       lauch.toEntity(rocketName = rocket.name,rocketDescription = rocket.description)
                    }
                     launchLocalDataSource.saveLaunches(entities)
                     Result.success(Unit)

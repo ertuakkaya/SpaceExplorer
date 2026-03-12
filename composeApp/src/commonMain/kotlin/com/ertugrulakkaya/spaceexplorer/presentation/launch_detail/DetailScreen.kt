@@ -102,7 +102,7 @@ fun DetailScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                .padding(start = 16.dp, end = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             DetailPhoto(
@@ -127,7 +127,10 @@ fun DetailScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            LaunchDescription(description = uiState.missionDescription)
+            LaunchDescription(
+                description = uiState.missionDescription,
+                rocketDescription = uiState.rocketDescription
+            )
 
             Spacer(modifier = Modifier.height(40.dp))
 

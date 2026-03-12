@@ -1,6 +1,7 @@
 package com.ertugrulakkaya.spaceexplorer.di
 
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.ertugrulakkaya.spaceexplorer.data.local.LaunchDatabase
 import com.ertugrulakkaya.spaceexplorer.data.local.LaunchDatabaseConstructor
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -12,14 +13,15 @@ import platform.Foundation.NSHomeDirectory
 import platform.Foundation.NSUserDomainMask
 
 actual val platformModule: Module = module {
-    single<LaunchDatabase> {
+    single<RoomDatabase.Builder<LaunchDatabase>> {
         val dbFilePath = documentDirectory() + "/" + LaunchDatabase.DATABASE_NAME
         Room.databaseBuilder<LaunchDatabase>(
             name = dbFilePath,
-            factory = { LaunchDatabaseConstructor.initialize() } // Use the constructor here
-        )
-            .setDriver(androidx.sqlite.driver.bundled.BundledSQLiteDriver()) // Required for KMP Native/iOS
-            .build()
+            factory = {
+                LaunchDatabaseConstructor.initialize()
+            }
+        ).setDriver(androidx.sqlite.driver.bundled.BundledSQLiteDriver())
+
     }
 
 
