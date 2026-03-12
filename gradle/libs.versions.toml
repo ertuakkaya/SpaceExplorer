@@ -22,6 +22,8 @@ navigation = "2.9.2"
 coil = "3.0.4"
 kotlinx-datetime = "0.7.1"
 compottie = "2.1.0"
+kotlinx-coroutines-test = "1.10.1"
+
 
 
 [libraries]
@@ -66,7 +68,7 @@ sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.r
 # navigation
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.7.3" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "kotlinx-" }
 
 #coil
 coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
@@ -79,6 +81,9 @@ kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.
 
 # compottie, lottie for cmp
 compottie = { module = "io.github.alexzhirkevich:compottie", version.ref = "compottie" }
+
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

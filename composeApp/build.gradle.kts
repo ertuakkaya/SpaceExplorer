@@ -76,6 +76,10 @@ kotlin {
             // compottie
             implementation(libs.compottie)
 
+            // kotlinx corotines tes
+            implementation(libs.kotlinx.coroutines.test)
+
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
