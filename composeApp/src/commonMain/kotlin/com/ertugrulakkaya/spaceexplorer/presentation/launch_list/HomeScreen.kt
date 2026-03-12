@@ -75,7 +75,7 @@ fun HomeScreen(
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
                 title = {
                     Text(
-                        text = "SpaceX Launches 5",
+                        text = "Space Explorer1",
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = MaterialTheme.typography.titleLarge.fontSize

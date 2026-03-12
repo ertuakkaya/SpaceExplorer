@@ -18,7 +18,7 @@ class LaunchRepositoryImpl (
     private val launchLocalDataSource: LaunchLocalDataSource,
     private val launchRemoteDataSource: LaunchRemoteDataSource
 ) : LaunchRepository{
-
+    // UI always gets the data from the database
     override fun getLaunches(): Flow<List<Launch>> {
         return launchLocalDataSource.getLaunches()
             .map { entities ->
@@ -29,12 +29,13 @@ class LaunchRepositoryImpl (
     }
 
 
+    // refresh db with new remote data
     override suspend fun refreshLaunches(): Result<Unit>  = withContext(Dispatchers.IO){
         launchRemoteDataSource.getLaunches().fold(
             onSuccess = { remoteLaunches ->
                 try {
                     val rocketCache = mutableMapOf<String, RocketDto>()
-
+                    // if map contains rocket do not request to remote. if not contains, request to remote and put to map
                    val entities = remoteLaunches.map { lauch ->
                        val rocket = rocketCache.getOrPut(lauch.rocket){
                            launchRemoteDataSource.getRocket(lauch.rocket).getOrThrow()
