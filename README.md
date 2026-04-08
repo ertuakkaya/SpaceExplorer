@@ -4,10 +4,12 @@ SpaceExplorer is a Kotlin Multiplatform (KMP) application designed to track spac
 
 ## Screenshots
 
-| Android | iOS |
-|---------|-----|
-| ![Android Home](screenshots/android_home.png) | ![iOS Home](screenshots/ios_home.png) |
-| ![Android Detail](screenshots/android_details.png) | ![iOS Detail](screenshots/ios_details.png) |
+<p align="center">
+<img src="screenshots/android_home.png" width="240" /> <img src="screenshots/ios_home.png" width="240" />
+</p>
+<p align="center">
+<img src="screenshots/android_details.png" width="240" /> <img src="screenshots/ios_details.png" width="240" />
+</p>
 
 ## Features
 - **Launch Tracking:** View upcoming and past space launches with detailed mission information.
