@@ -5,10 +5,10 @@ SpaceExplorer is a Kotlin Multiplatform (KMP) application designed to track spac
 ## Screenshots
 
 <p align="center">
-<img src="screenshots/android_home.png" width="240" /> <img src="screenshots/ios_home.png" width="240" />
+<img src="screenshots/ios_home.png" width="240" /> <img src="screenshots/android_home.png" width="240" />
 </p>
 <p align="center">
-<img src="screenshots/android_details.png" width="240" /> <img src="screenshots/ios_details.png" width="240" />
+<img src="screenshots/ios_details.png" width="240" /> <img src="screenshots/android_details.png" width="240" />
 </p>
 
 ## Features
